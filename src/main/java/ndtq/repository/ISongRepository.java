@@ -47,4 +47,7 @@ public interface ISongRepository extends JpaRepository<Songs, Long> {
     @Query(value = "DELETE FROM casestudy4.playlist_song WHERE id_playlist = ?1",nativeQuery = true)
     void deleteSongInSinger(Long idSong);
 
+    @Query(value = "select * from songs order by date desc limit 10", nativeQuery = true)
+    Iterable<Songs> findTop10SongsOrderByDate();
+
 }
