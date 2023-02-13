@@ -12,7 +12,7 @@ public interface IUserService extends IGeneralService<Users> {
     void updatePasswordByID(String newPass, Long id);
     Iterable<Users> findAllByNameContaining(String name);
     void updateUser(Long id, String name, String address, String email, String phone);
-
+    void updatePass(Long id, String password);
     Optional<Users> findUserByName(String name);
     Optional<Users> findUserByUsername(String username);
 

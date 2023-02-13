@@ -19,8 +19,9 @@ public interface IUserRepository extends JpaRepository<Users, Long> {
     @Modifying
     @Query(value = "update users set  name = :name, address = :address, email = :email, phone = :phone where id = :id", nativeQuery = true)
     void updateUser(Long id,String name, String address, String email, String phone);
-    Iterable<Users> findAllByNameContaining(String name);
-
+    @Modifying
+    @Query(value = "update users set password = :password where (id = :id)", nativeQuery = true)
+    void updatePass(Long id, String password);
     Optional<Users> findUserByName(String name);
 
     Optional<Users> findUserByUsername(String username);
@@ -29,4 +30,6 @@ public interface IUserRepository extends JpaRepository<Users, Long> {
 
     @Query(value = "select username from users", nativeQuery = true)
     List<String> findAllUsername();
+
+    Iterable<Users> findAllByNameContaining(String name);
 }
