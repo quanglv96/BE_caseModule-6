@@ -44,6 +44,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public void updatePass(Long id, String password) {
+        iUserRepository.updatePass(id, password);
+    }
+
+    @Override
     public Iterable<Users> findAllByNameContaining(String name) {
         return iUserRepository.findAllByNameContaining(name);
     }

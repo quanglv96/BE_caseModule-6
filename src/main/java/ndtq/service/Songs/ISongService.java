@@ -11,6 +11,7 @@ import java.util.List;
 public interface ISongService extends IGeneralService<Songs> {
     Iterable<Songs> listTrending();
     Iterable<Songs> listTrendingAsc();
+    Iterable<Songs> listTop10SongsTrending();
     Iterable<Songs> findAllByNameContaining(String name);
     Iterable<Songs> listNewSongs();
     Iterable<Songs> findAllByUsers(Users users);
