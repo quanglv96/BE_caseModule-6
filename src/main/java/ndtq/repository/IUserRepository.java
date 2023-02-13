@@ -19,6 +19,9 @@ public interface IUserRepository extends JpaRepository<Users, Long> {
     @Modifying
     @Query(value = "update users set  name = :name, address = :address, email = :email, phone = :phone where (id = :id)", nativeQuery = true)
     void updateUser(Long id,String name, String address, String email, String phone);
+    @Modifying
+    @Query(value = "update users set password = :password where (id = :id)", nativeQuery = true)
+    void updatePass(Long id, String password);
 
     Iterable<Users> findAllByNameContaining(String name);
 

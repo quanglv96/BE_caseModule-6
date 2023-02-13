@@ -2,6 +2,7 @@ package ndtq.controller;
 
 import ndtq.model.Users;
 import ndtq.service.users.IUserService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +57,20 @@ public class UserController {
           return new ResponseEntity<>(userService.findById(id).get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.CONFLICT);
+    }
+
+    @PutMapping("/changePass/{id}")
+    public ResponseEntity<Users> updatePass(@PathVariable Long id,
+                                           @RequestParam String password) {
+        Optional<Users> usersOptional = userService.findById(id);
+        if(usersOptional.isPresent()) {
+            userService.updatePass(id, password);
+           Users user = userService.findById(id).get();
+           user.setPassword(password);
+            return new ResponseEntity<>(user,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.CONFLICT);
+
     }
 
     @GetMapping("/usernames")
