@@ -27,15 +27,15 @@ public class SongController {
     @Autowired
     private IUserService userService;
 
-    @PostMapping("/listNewSongs")
+    @GetMapping("/listNewSongs")
     public ResponseEntity<Iterable<Songs>> listNewSongsByDate() {
         return new ResponseEntity<>(iSongService.listNewSongs(), HttpStatus.OK);
     }
-    @PostMapping("/listSongsTrending")
+    @GetMapping("/listSongsTrending")
     public ResponseEntity<Iterable<Songs>> listSongsTrendingByView() {
         return new ResponseEntity<>(iSongService.listTrending(), HttpStatus.OK);
     }
-    @PostMapping("/listSongsTrendingAsc")
+    @GetMapping("/listSongsTrendingAsc")
     public ResponseEntity<Iterable<Songs>> listSongsTrendingByViewAsc() {
         return new ResponseEntity<>(iSongService.listTrendingAsc(), HttpStatus.OK);
     }
