@@ -50,6 +50,18 @@ public class SongController {
     ResponseEntity<Iterable<Songs>> listSongsByUser(@PathVariable("id") Long idUser) {
         return new ResponseEntity<>(iSongService.findAllByUsers(userService.findById(idUser).get()), HttpStatus.OK);
     }
+    @PostMapping()
+    ResponseEntity<?> save(@RequestBody Songs songs) {
+        songs.setDate(LocalDate.now());
+        songs.setViews(1000);
+        iSongService.save(songs);
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
+    @DeleteMapping("{id}")
+    ResponseEntity<?> deleteSongs(@PathVariable("id") Long idSongs) {
+        iSongService.remove(idSongs);
+        return new ResponseEntity<> (HttpStatus.OK);
+    }
 }
 
 

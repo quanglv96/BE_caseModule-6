@@ -7,6 +7,7 @@ import ndtq.model.Tags;
 import ndtq.model.Users;
 import ndtq.repository.ISongRepository;
 import ndtq.service.Singer.ISingerService;
+import ndtq.service.Singer.SingerService;
 import ndtq.service.Tags.ITagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,17 +65,12 @@ public class SongService implements ISongService {
 
     @Override
     public Songs save(Songs songs) {
-        isongRepository.save(songs);
-//        Songs newSong=isongRepository.findByName(songs.getName()).get();
-        List<Tags> tagsList = songs.getTagsList();
-        for (int i = 0; i <  tagsList.size(); i++) {
-            tagService.addSongTag(songs.getId(),tagsList.get(i).getId());
-        }
-        List<Singer> listSinger=songs.getSingerList();
-        for (int i = 0; i < listSinger.size(); i++) {
-            singerService.addSingerSong(songs.getId(),listSinger.get(i).getId());
-        }
-        return isongRepository.save(songs);
+        List<Tags> tagsList = (List<Tags>) tagService.StringToListObj(songs.getTagsList());
+        songs.setTagsList(tagsList);
+        List<Singer> singerList= (List<Singer>) singerService.StringToListObj(songs.getSingerList());
+        songs.setSingerList(singerList);
+        songs=isongRepository.save(songs);
+        return songs;
     }
 
     @Override
@@ -82,6 +78,8 @@ public class SongService implements ISongService {
         isongRepository.deleteSongInPlaylist(id);
         isongRepository.deleteSongInTag(id);
         isongRepository.deleteSongInSinger(id);
+        isongRepository.deleteSongsInLike(id);
+        isongRepository.deleteSongsInComment(id);
         isongRepository.deleteById(id);
     }
 

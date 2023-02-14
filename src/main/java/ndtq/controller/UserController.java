@@ -25,11 +25,11 @@ public class UserController {
         Optional<Users> users = userService.findUserByUsername(username);
         if (users.isPresent()) {
             if (Objects.equals(pass, users.get().getPassword())) {
-                return new ResponseEntity<>(users,HttpStatus.OK);
+                return new ResponseEntity<>(users, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Wrong Password", HttpStatus.NOT_FOUND);
             }
-        }else {
+        } else {
             return new ResponseEntity<>("Username is not Present", HttpStatus.NOT_FOUND);
         }
     }
@@ -41,7 +41,7 @@ public class UserController {
 
     @PostMapping()
     public ResponseEntity<Users> createUser(@RequestBody Users user) {
-        if(userService.checkUsername(user.getUsername())) {
+        if (userService.checkUsername(user.getUsername())) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         user.setAvatar("https://iupac.org/wp-content/uploads/2018/05/default-avatar.png");
@@ -52,23 +52,34 @@ public class UserController {
     public ResponseEntity<Users> updateUser(@PathVariable Long id,
                                             @RequestBody Users users) {
         Optional<Users> user = userService.findById(id);
-        if(user.isPresent()) {
-            userService.updateUser(id, users.getName(), users.getAddress(), users.getEmail(),users.getPhone());
-
-          return new ResponseEntity<>(userService.findById(id).get(), HttpStatus.OK);
+        if (user.isPresent()) {
+            // set lại avt cũ khi k up ảnh
+            if(users.getAvatar()==null){
+                users.setAvatar(user.get().getAvatar());
+            }
+            // lấy lại mật khẩu của user cũ gán cho user mới
+            users.setPassword(user.get().getPassword());
+            users.setUsername(user.get().getUsername());
+            // gán id cho user mới
+            users.setId(id);
+            // lấy lại role của user cũ gán cho user mới
+            users.setRole(user.get().getRole());
+            // save user mơí
+            userService.save(users);
+            return new ResponseEntity<>(userService.findById(id).get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
     @PutMapping("/changePass/{id}")
     public ResponseEntity<Users> updatePass(@PathVariable Long id,
-                                           @RequestParam String password) {
+                                            @RequestParam String password) {
         Optional<Users> usersOptional = userService.findById(id);
-        if(usersOptional.isPresent()) {
+        if (usersOptional.isPresent()) {
             userService.updatePass(id, password);
-           Users user = userService.findById(id).get();
-           user.setPassword(password);
-            return new ResponseEntity<>(user,HttpStatus.OK);
+            Users user = userService.findById(id).get();
+            user.setPassword(password);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.CONFLICT);
 
@@ -82,5 +93,9 @@ public class UserController {
     @GetMapping("{id}")
     public ResponseEntity<Optional<Users>> findById(@PathVariable("id") Long id) {
         return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
+    }
+    @GetMapping("/countByUser/{id}")
+    public ResponseEntity<List<Integer>> countByUser(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(userService.countByUser(id), HttpStatus.OK);
     }
 }

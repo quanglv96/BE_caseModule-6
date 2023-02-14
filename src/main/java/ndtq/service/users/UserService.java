@@ -6,6 +6,7 @@ import ndtq.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -74,5 +75,12 @@ public class UserService implements IUserService {
     @Override
     public List<String> findAllUsername() {
         return iUserRepository.findAllUsername();
+    }
+    @Override
+    public  List<Integer> countByUser(Long id){
+        List<Integer> list = new ArrayList<>();
+        list.add(iUserRepository.countPlaylistByUser(id));
+        list.add(iUserRepository.countSongByUser(id));
+        return list;
     }
 }

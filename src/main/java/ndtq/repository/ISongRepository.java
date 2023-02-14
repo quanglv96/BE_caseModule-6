@@ -38,16 +38,23 @@ public interface ISongRepository extends JpaRepository<Songs, Long> {
     @Query(value = "select * from songs where id in (select id_song from song_singer  where id_singer= :id )", nativeQuery = true)
     Iterable<Songs> findAllBySingerList(Long id);
     @Modifying
-    @Query(value="DELETE FROM casestudy4.playlist_song WHERE id_songs = ?1", nativeQuery = true)
+    @Query(value="DELETE FROM dbmodule6.playlist_song WHERE id_songs = ?1", nativeQuery = true)
     void deleteSongInPlaylist(Long idSong);
     @Modifying
-    @Query(value="DELETE FROM casestudy4.song_tag WHERE id_song = ?1", nativeQuery = true)
+    @Query(value="DELETE FROM dbmodule6.song_tag WHERE id_song = ?1", nativeQuery = true)
     void deleteSongInTag(Long idSong);
     @Modifying
-    @Query(value = "DELETE FROM casestudy4.playlist_song WHERE id_playlist = ?1",nativeQuery = true)
+    @Query(value = "DELETE FROM dbmodule6.playlist_song WHERE id_playlist = ?1",nativeQuery = true)
     void deleteSongInSinger(Long idSong);
+    @Modifying
+    @Query(value ="DELETE FROM dbmodule6.like_user_song WHERE id_song= ?1", nativeQuery = true)
+    void deleteSongsInLike(Long idSong);
+    @Modifying
+    @Query(value ="DELETE FROM dbmodule6.comments WHERE id_songs= ?1", nativeQuery = true)
+    void deleteSongsInComment(Long idSong);
 
     @Query(value = "select * from songs order by date desc limit 10", nativeQuery = true)
     Iterable<Songs> findTop10SongsOrderByDate();
+
 
 }
