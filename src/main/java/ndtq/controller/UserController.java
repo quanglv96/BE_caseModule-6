@@ -52,9 +52,15 @@ public class UserController {
                                             @RequestBody Users users) {
         Optional<Users> user = userService.findById(id);
         if(user.isPresent()) {
-            userService.updateUser(id, users.getName(), users.getAddress(), users.getEmail(),users.getPhone());
-
-          return new ResponseEntity<>(userService.findById(id).get(), HttpStatus.OK);
+            String avatar = user.get().getAvatar();
+            if (avatar == null) {
+                user.get().setAvatar("https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745");
+                userService.updateUser(id, users.getName(), users.getAddress(), users.getEmail(),users.getPhone(),users.getAvatar());
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+            userService.updateUser(id, users.getName(), users.getAddress(), users.getEmail(),users.getPhone(), users.getAvatar());
+            Users returnUser = user.get().setChangeInfo(users.getName(), users.getAddress(), users.getEmail(),users.getPhone(), users.getAvatar(), user.get());
+            return new ResponseEntity<>(returnUser, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
