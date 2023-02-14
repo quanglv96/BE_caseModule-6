@@ -44,6 +44,7 @@ public class UserController {
         if(userService.checkUsername(user.getUsername())) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
+        user.setAvatar("https://iupac.org/wp-content/uploads/2018/05/default-avatar.png");
         return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
     }
 
