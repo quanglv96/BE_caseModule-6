@@ -19,7 +19,7 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private IUserService userService;
-
+    //TODO với những trường như password, thông tin bí mật của khách hàng hãy mã hóa chúng để tránh các trường hợp bị hacker tấn công nhé :))
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestParam("username") String username, @RequestParam("pass") String pass) {
         Optional<Users> users = userService.findUserByUsername(username);

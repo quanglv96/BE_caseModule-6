@@ -62,6 +62,7 @@ public class SongService implements ISongService {
         return isongRepository.findById(id);
     }
 
+    //TODO hầu hết ae chưa xử lý Exception, với những nghiệp vụ có nhiều logic code nếu không may xảy ra lỗi thì còn biết check và debug ở đâu
     @Override
     public Songs save(Songs songs) {
         isongRepository.save(songs);

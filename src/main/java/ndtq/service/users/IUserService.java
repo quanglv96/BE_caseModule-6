@@ -15,7 +15,8 @@ public interface IUserService extends IGeneralService<Users> {
     void updatePass(Long id, String password);
     Optional<Users> findUserByName(String name);
     Optional<Users> findUserByUsername(String username);
-
+    //TODO tạo ràng buộc trực tiếp ở Database xử lý cho trường hợp này để không cần phải viết thêm funtion check nữa
+    // user.name = unique
     Boolean checkUsername(String name);
 
     List<String> findAllUsername();

@@ -1,6 +1,7 @@
 package ndtq.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,7 @@ import javax.validation.constraints.Pattern;
 @Entity
 @Data
 @NoArgsConstructor
+@Builder
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +36,8 @@ public class Users {
     private Role role;
     // ae tạo mới contructor theo logic cần sử dụng
 
+    //TODO có thể sử dụng lombok @Builder để tạo các object thay cho việc make nhiều contructor như này
+    // ex:         Users.builder().username("value").password("value").name("value").address("value").phone("value").build();
     public Users(String username, String password, String name, String address, String phone) {
         this.username = username;
         this.password = password;

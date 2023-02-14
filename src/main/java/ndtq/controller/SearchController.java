@@ -28,7 +28,8 @@ public class SearchController {
     @Autowired
     private IUserService iUserService;
 
-
+    //TODO hạn chế xử lý logic theo kiểu callback funtion như này trong controller, sau này khi dự án lớn với nhiều nghiệp vụ khác nhau sẽ khó kiểm soát được các lỗi ở runtime
+    // hãy để service xử lý logic nghiệp vụ dự án, layer controller nên chỉ phục vụ cho việc điều hướng để đảm bảo nguyên tắc SOLID
     @GetMapping
     public ResponseEntity<Object> search(@RequestParam("search") String text){
         List<Object> resultSearch=new ArrayList<>();

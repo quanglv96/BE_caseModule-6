@@ -35,6 +35,9 @@ public class TagService implements ITagService {
         iTagRepository.deleteById(id);
     }
 
+    //TODO hạn chế lồng vòng for rồi sử dụng các query xuống tầng database lý do khi có nhiều dữ liệu vòng for chạy quá nhiều thì số lần chọc xuống db sẽ làm quá tải db.
+    // giải pháp: sử dụng query 1 lần cho logic như thế này bằng cách dùng câu lệnh điều kiện in.
+    // ex: findTagsByNameIn(List<String> listTag)
     @Override
     public Iterable<Tags> StringToListObj(List<String> listTag) {
         List<Tags> list = new ArrayList<>();
