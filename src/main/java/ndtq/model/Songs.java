@@ -33,7 +33,7 @@ public class Songs {
             inverseJoinColumns = {@JoinColumn(name = "id_tags")})
     private List<Tags> tagsList;
     private long views;
-    @OneToMany(targetEntity = Users.class)
+    @ManyToMany(targetEntity = Users.class)
     @JoinTable( name = "like_user_song",joinColumns = {@JoinColumn(name = "id_song")},
             inverseJoinColumns = {@JoinColumn(name = "id_user")})
     private List<Users> userLikeSong;

@@ -14,16 +14,29 @@ import javax.transaction.Transactional;
 @Transactional
 public interface IPlaylistRepository extends JpaRepository<Playlist, Long> {
     Iterable<Playlist> findAllByOrderByViewsDesc();
+
     Iterable<Playlist> findAllByOrderByDateCreateDesc();
+
     Iterable<Playlist> findAllByUsers(Users users);
+
     Iterable<Playlist> findAllByNameContaining(String name);
-@Modifying
-    @Query(value = "update Playlist set views=(views+ 1)",nativeQuery = true)
+
+    @Modifying
+    @Query(value = "update Playlist set views=(views+ 1)", nativeQuery = true)
     void setViewsAllPlaylist();
-@Modifying
-    @Query(value="DELETE FROM casestudy4.playlist_tag WHERE id_playlist = ?1", nativeQuery = true)
+
+    @Modifying
+    @Query(value = "DELETE FROM dbmodule6.playlist_tag WHERE id_playlist = ?1", nativeQuery = true)
     void deletePlaylistInTag(Long idPlaylist);
-@Modifying
-    @Query(value="DELETE FROM casestudy4.playlist_song WHERE id_playlist = ?1", nativeQuery = true)
+
+    @Modifying
+    @Query(value = "DELETE FROM dbmodule6.like_user_playlist WHERE id_playlist = ?1", nativeQuery = true)
+    void deletePlaylistInLike(Long idPlaylist);
+    @Modifying
+    @Query(value = "DELETE FROM dbmodule6.comments WHERE id_playlist = ?1", nativeQuery = true)
+    void deletePlaylistInComment(Long idPlaylist);
+
+    @Modifying
+    @Query(value = "DELETE FROM dbmodule6.playlist_song WHERE id_playlist =  ?1", nativeQuery = true)
     void deletePlaylistInSongs(Long idPlaylist);
 }

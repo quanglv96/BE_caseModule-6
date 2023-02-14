@@ -14,7 +14,7 @@ import java.util.Optional;
 @Transactional
 public interface IUserRepository extends JpaRepository<Users, Long> {
     @Modifying
-    @Query(value = "UPDATE `casestudy4`.`users` SET `password` = ?1 WHERE (`id` = ?2);", nativeQuery = true)
+    @Query(value = "UPDATE `dbmodule6`.`users` SET `password` = ?1 WHERE (`id` = ?2);", nativeQuery = true)
     void updatePasswordByID(String newPass, Long id);
     @Modifying
     @Query(value = "update users set  name = :name, address = :address, email = :email, phone = :phone where (id = :id)", nativeQuery = true)
