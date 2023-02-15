@@ -26,7 +26,6 @@ public class TagService implements ITagService {
 
     @Override
     public Tags save(Tags tags) {
-
         return iTagRepository.save(tags);
     }
 
@@ -36,13 +35,13 @@ public class TagService implements ITagService {
     }
 
     @Override
-    public Iterable<Tags> StringToListObj(List<String> listTag) {
+    public Iterable<Tags> StringToListObj(List<Tags> listTag) {
         List<Tags> list = new ArrayList<>();
-        for (int i = 1; i < listTag.size(); i++) {
-            if (!iTagRepository.findTagsByName(listTag.get(i)).isPresent()) {
-                save(new Tags(listTag.get(i)));
+        for (int i = 0; i < listTag.size(); i++) {
+            if (!iTagRepository.findTagsByName(listTag.get(i).getName()).isPresent()) {
+                save(new Tags(listTag.get(i).getName()));
             }
-            list.add(iTagRepository.findTagsByName(listTag.get(i)).get());
+            list.add(iTagRepository.findTagsByName(listTag.get(i).getName()).get());
         }
         return list;
     }

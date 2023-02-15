@@ -12,21 +12,17 @@ import java.util.List;
 @Entity
 @Data
 
-@AllArgsConstructor
 public class Playlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
     private String name;
     private String description; // mô tả nội dung bài hát
     private String avatar;
     private LocalDate dateCreate; // ngày tạo
     private LocalDate lastUpdate;
-    @Transient
-    private String stringTag;
     // ngày cập nhập lần cuối
-    @NotNull
+
     @OneToOne(targetEntity = Users.class)
     @JoinColumn(name = "id_users")
     private Users users;// ngươi tạo playlist
@@ -40,7 +36,7 @@ public class Playlist {
             inverseJoinColumns = {@JoinColumn(name = "id_tags")})
     private List<Tags> tagsList;
     private long views;
-    @OneToMany(targetEntity = Users.class)
+    @ManyToMany(targetEntity = Users.class)
     @JoinTable(name = "like_user_playlist", joinColumns = {@JoinColumn(name = "id_playlist")},
             inverseJoinColumns = {@JoinColumn(name = "id_user")})
     private List<Users> userLikesPlaylist;
@@ -117,6 +113,18 @@ public class Playlist {
     }
 
     public Playlist() {
+    }
+
+    public Playlist(String name, String description, String avatar, LocalDate dateCreate, LocalDate lastUpdate, Users users, List<Tags> tagsList, long views) {
+        this.name = name;
+        this.description = description;
+        this.avatar = avatar;
+        this.dateCreate = dateCreate;
+        this.lastUpdate = lastUpdate;
+        this.users = users;
+        this.tagsList = tagsList;
+        this.views = views;
+
     }
 }
 

@@ -30,18 +30,18 @@ public class PlaylistService implements IPlaylistService{
 
     @Override
     public Playlist save(Playlist playlist) {
-        List<Tags> tagsList = playlist.getTagsList();
-        iPlaylistRepository.save(playlist);
-        for (int i = 0; i <  tagsList.size(); i++) {
-            tagService.addPlaylistTag(playlist.getId(),tagsList.get(i).getId());
-        }
-        return iPlaylistRepository.save(playlist);
+        List<Tags> tagsList = (List<Tags>) tagService.StringToListObj(playlist.getTagsList());
+        playlist.setTagsList(tagsList);
+        playlist=iPlaylistRepository.save(playlist);
+        return playlist;
     }
 
     @Override
     public void remove(Long id) {
         iPlaylistRepository.deletePlaylistInSongs(id);
         iPlaylistRepository.deletePlaylistInTag(id);
+        iPlaylistRepository.deletePlaylistInLike(id);
+        iPlaylistRepository.deletePlaylistInComment(id);
         iPlaylistRepository.deleteById(id);
     }
 

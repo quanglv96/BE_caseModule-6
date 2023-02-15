@@ -15,8 +15,8 @@ public interface ISingerRepository extends JpaRepository<Singer, Long> {
 
     Optional<Singer> findByName(String name);
     @Modifying
-    @Query(value = "INSERT INTO casestudy4.song_singer (id_song, id_singer) VALUES (?1, ?2);",nativeQuery = true)
+    @Query(value = "INSERT INTO dbmodule6.song_singer (id_song, id_singer) VALUES (?1, ?2);",nativeQuery = true)
     void addSingerSong(Long idSong, Long idSinger);
-    @Query(value = "SELECT count(*) FROM casestudy4.song_singer where id_song=?1 and id_singer=?2" ,nativeQuery = true)
+    @Query(value = "SELECT count(*) FROM dbmodule6.song_singer where id_song=?1 and id_singer=?2" ,nativeQuery = true)
     Integer checkSongSinger(Long idSong, Long idSinger);
 }
