@@ -40,11 +40,6 @@ public class UserService implements IUserService {
 
     @Override
     public void updateUser(Long id, String name, String address, String email, String phone, String avatar) {
-        if (avatar == null) {
-            // update withoutAvatar
-        } else {
-            // update withAvatar
-        }
         iUserRepository.updateUser(id, name, address, email, phone, avatar);
     }
 
