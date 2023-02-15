@@ -19,4 +19,5 @@ public interface IUserService extends IGeneralService<Users> {
     Boolean checkUsername(String name);
 
     List<String> findAllUsername();
+    List<Integer> countByUser(Long id);
 }

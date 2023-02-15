@@ -51,13 +51,13 @@ public class SingerService implements ISingerService{
         return singerRepository.findAllByNameContaining(name);
     }
     @Override
-    public Iterable<Singer> StringToListObj(List<String> listSinger) {
+    public Iterable<Singer> StringToListObj(List<Singer> listSinger) {
         List<Singer> list = new ArrayList<>();
         for (int i = 0; i < listSinger.size(); i++) {
-            if(!singerRepository.findByName(listSinger.get(i)).isPresent() && !Objects.equals(listSinger.get(i), "")){
-                save(new Singer(listSinger.get(i)));
+            if(!singerRepository.findByName(listSinger.get(i).getName()).isPresent() && !Objects.equals(listSinger.get(i).getName(), "")){
+                save(new Singer(listSinger.get(i).getName()));
             }
-            list.add(singerRepository.findByName(listSinger.get(i)).get());
+            list.add(singerRepository.findByName(listSinger.get(i).getName()).get());
         }
         return list;
     }

@@ -16,7 +16,7 @@ public interface ITagRepository extends JpaRepository<Tags, Long> {
     Optional<Tags> findTagsByName(String name);
 
     @Modifying
-    @Query(value = "INSERT INTO casestudy4.song_tag (id_song, id_tags)VALUES (?1, ?2)", nativeQuery = true)
+    @Query(value = "INSERT INTO dbmodule6.song_tag (id_song, id_tags)VALUES (?1, ?2)", nativeQuery = true)
     void addSongTag(Long idSong,Long idTag);
     @Transactional
     @Modifying()

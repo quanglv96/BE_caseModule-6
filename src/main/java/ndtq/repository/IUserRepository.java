@@ -23,14 +23,18 @@ public interface IUserRepository extends JpaRepository<Users, Long> {
     @Query(value = "update users set password = :password where (id = :id)", nativeQuery = true)
     void updatePass(Long id, String password);
 
+    Iterable<Users> findAllByNameContaining(String name);
+
     Optional<Users> findUserByName(String name);
 
     Optional<Users> findUserByUsername(String username);
 
     int countUsersByUsername(String name);
 
-    @Query(value = "select username from users", nativeQuery = true)
+    @Query(value = "select username from dbmodule6.users", nativeQuery = true)
     List<String> findAllUsername();
-
-    Iterable<Users> findAllByNameContaining(String name);
+    @Query(value = "select count(*) from dbmodule6.songs where id_users=?1", nativeQuery = true)
+    int countSongByUser(Long id);
+    @Query(value = "select count(*) from dbmodule6.playlist where id_users=?1", nativeQuery = true)
+    int countPlaylistByUser(Long id);
 }
