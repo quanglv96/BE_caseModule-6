@@ -65,7 +65,7 @@ public class PlayListController {
         playlistService.remove(idPlaylist);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     ResponseEntity<Optional<Playlist>> findPlaylistById(@PathVariable("id") Long idPlaylist) {
         return new ResponseEntity<>(playlistService.findById(idPlaylist),HttpStatus.OK);
     }

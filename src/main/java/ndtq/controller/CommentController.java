@@ -27,8 +27,8 @@ public class CommentController {
         return new ResponseEntity<>(iCommentService.findAllBySongsOrderByDateDesc(iSongService.findById(id).get()), HttpStatus.OK);
     }
 
-    @GetMapping("/playlist")
-    public ResponseEntity<Iterable<Comments>> listCommentInPlaylist(@RequestBody Long id) {
+    @GetMapping("/playlist/{id}")
+    public ResponseEntity<Iterable<Comments>> listCommentInPlaylist(@PathVariable Long id) {
         return new ResponseEntity<>(iCommentService.findAllByPlaylistOrderByDateDesc(iPlaylistService.findById(id).get()), HttpStatus.OK);
     }
 
