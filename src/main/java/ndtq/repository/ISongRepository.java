@@ -55,6 +55,7 @@ public interface ISongRepository extends JpaRepository<Songs, Long> {
 
     @Query(value = "select * from songs order by date desc limit 10", nativeQuery = true)
     Iterable<Songs> findTop10SongsOrderByDate();
-
+    @Query(value = "select songs.id, songs.audio, songs.avatar, songs.composer, songs.date, songs.name, songs.views, songs.id_users from songs inner join (select id_song, count(id_user) from like_user_song group by id_song order by count(id_user) desc limit 10) as view on songs.id = view.id_song", nativeQuery = true)
+    Iterable<Songs> findTop10SongsOrderByLike();
 
 }

@@ -17,8 +17,8 @@ public interface IUserRepository extends JpaRepository<Users, Long> {
     @Query(value = "UPDATE `dbmodule6`.`users` SET `password` = ?1 WHERE (`id` = ?2);", nativeQuery = true)
     void updatePasswordByID(String newPass, Long id);
     @Modifying
-    @Query(value = "update users set  name = :name, address = :address, email = :email, phone = :phone where id = :id", nativeQuery = true)
-    void updateUser(Long id,String name, String address, String email, String phone);
+    @Query(value = "update users set  name = :name, address = :address, email = :email, phone = :phone, avatar = :avatar where id = :id", nativeQuery = true)
+    void updateUser(Long id,String name, String address, String email, String phone, String avatar);
     @Modifying
     @Query(value = "update users set password = :password where (id = :id)", nativeQuery = true)
     void updatePass(Long id, String password);
