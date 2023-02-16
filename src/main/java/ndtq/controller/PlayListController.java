@@ -80,4 +80,9 @@ public class PlayListController {
     public ResponseEntity<Iterable<Playlist>> getTopLikePlaylist() {
         return new ResponseEntity<>(playlistService.findTopLikePlaylist(),HttpStatus.OK);
     }
+    @PutMapping("/like")
+    ResponseEntity<Iterable<Songs>> changeLike(@RequestBody Playlist playlist) {
+        playlistService.save(playlist);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
