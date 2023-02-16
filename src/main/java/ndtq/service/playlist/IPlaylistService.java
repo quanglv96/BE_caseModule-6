@@ -8,7 +8,9 @@ import ndtq.service.IGeneralService;
 public interface IPlaylistService extends IGeneralService<Playlist> {
     Iterable<Playlist> listTrending();
     Iterable<Playlist> listNewPlaylist();
-    Iterable<Playlist> findAllByUsers(Users users);
 
+    Iterable<Playlist> listTop10ViewsPlaylistTrending();
+
+    Iterable<Playlist> findAllByUsers(Users users);
     Iterable<Playlist> findAllByNameContaining(String name);
 }

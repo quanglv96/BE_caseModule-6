@@ -25,6 +25,9 @@ public interface IPlaylistRepository extends JpaRepository<Playlist, Long> {
     @Query(value = "update Playlist set views=(views+ 1)", nativeQuery = true)
     void setViewsAllPlaylist();
 
+    @Query (value = "select * from dbmodule6.playlist order by views desc limit 10", nativeQuery = true)
+    Iterable<Playlist> findTop10PlaylistsOrderByViewDesc();
+
     @Modifying
     @Query(value = "DELETE FROM dbmodule6.playlist_tag WHERE id_playlist = ?1", nativeQuery = true)
     void deletePlaylistInTag(Long idPlaylist);

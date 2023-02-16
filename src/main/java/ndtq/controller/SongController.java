@@ -38,7 +38,7 @@ public class SongController {
 
     @GetMapping("/listTop10SongsTrending")
     public ResponseEntity<Iterable<Songs>> listTop10SongsTrending() {
-        return new ResponseEntity<>(iSongService.listTop10SongsLikeTrending(), HttpStatus.OK);
+        return new ResponseEntity<>(iSongService.listTop10SongsTrending(), HttpStatus.OK);
     }
 
     @GetMapping("/listSongsTrendingAsc")
