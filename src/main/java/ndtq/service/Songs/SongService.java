@@ -41,6 +41,10 @@ public class SongService implements ISongService {
     public Iterable<Songs> listTop10SongsTrending() {
         return isongRepository.findTop10SongsOrderByDate();
     }
+    @Override
+    public Iterable<Songs> listTop10SongsLikeTrending() {
+        return isongRepository.findTop10SongsOrderByLike();
+    }
 
     @Override
     public Iterable<Songs> findAllByNameContaining(String name) {
@@ -89,22 +93,8 @@ public class SongService implements ISongService {
     }
 
     @Override
-    public List<Songs> generateFiveRandom(Long id) {
-        List<Songs> result = new ArrayList<>();
-        List<Songs> songsList = (List<Songs>) findAll();
-        Set<Integer> indexes = new HashSet<>();
-        while (indexes.size() <= 4) {
-            Random rand = new Random();
-            int index = rand.nextInt(songsList.size());
-            if (Objects.equals(songsList.get(index).getId(), id)) {
-                continue;
-            }
-            indexes.add(index);
-        }
-        for (int i : indexes) {
-            result.add(songsList.get(i));
-        }
-        return result;
+    public  Iterable<Songs> suggest5Songs() {
+        return isongRepository.suggest5Songs();
     }
 
 }

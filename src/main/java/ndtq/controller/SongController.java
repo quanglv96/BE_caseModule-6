@@ -38,12 +38,16 @@ public class SongController {
 
     @GetMapping("/listTop10SongsTrending")
     public ResponseEntity<Iterable<Songs>> listTop10SongsTrending() {
-        return new ResponseEntity<>(iSongService.listTop10SongsTrending(), HttpStatus.OK);
+        return new ResponseEntity<>(iSongService.listTop10SongsLikeTrending(), HttpStatus.OK);
     }
 
     @GetMapping("/listSongsTrendingAsc")
     public ResponseEntity<Iterable<Songs>> listSongsTrendingByViewAsc() {
         return new ResponseEntity<>(iSongService.listTrendingAsc(), HttpStatus.OK);
+    }
+    @GetMapping("/listTop10SongsLikeTrending")
+    public ResponseEntity<Iterable<Songs>> listTop10SongsLikeTrending() {
+        return new ResponseEntity<>(iSongService.listTop10SongsLikeTrending(), HttpStatus.OK);
     }
 
     @GetMapping("/listSongsByUser/{id}")
@@ -61,6 +65,24 @@ public class SongController {
     ResponseEntity<?> deleteSongs(@PathVariable("id") Long idSongs) {
         iSongService.remove(idSongs);
         return new ResponseEntity<> (HttpStatus.OK);
+    }
+    @GetMapping("{id}")
+    ResponseEntity<Optional<Songs>> findSongById(@PathVariable("id") Long idSong) {
+        return new ResponseEntity<>(iSongService.findById(idSong), HttpStatus.OK);
+    }
+    @PutMapping("{id}")
+    ResponseEntity<Optional<Songs>> updateSongs(@PathVariable("id") Long idSong,@RequestBody Songs newSongs) {
+        Songs oldSong=iSongService.findById(idSong).get();
+        newSongs.setId(idSong);
+        newSongs.setViews(oldSong.getViews());
+        newSongs.setDate(oldSong.getDate());
+        newSongs.setUserLikeSong(oldSong.getUserLikeSong());
+        iSongService.save(newSongs);
+        return new ResponseEntity<>(iSongService.findById(idSong), HttpStatus.OK);
+    }
+    @GetMapping("/suggest")
+    ResponseEntity<Iterable<Songs>> suggest5Songs() {
+        return new ResponseEntity<>(iSongService.suggest5Songs(), HttpStatus.OK);
     }
 }
 

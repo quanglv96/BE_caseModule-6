@@ -53,8 +53,12 @@ public interface ISongRepository extends JpaRepository<Songs, Long> {
     @Query(value ="DELETE FROM dbmodule6.comments WHERE id_songs= ?1", nativeQuery = true)
     void deleteSongsInComment(Long idSong);
 
-    @Query(value = "select * from songs order by date desc limit 10", nativeQuery = true)
+    @Query(value = "select * from dbmodule6.songs order by date desc limit 10", nativeQuery = true)
     Iterable<Songs> findTop10SongsOrderByDate();
+    @Query(value = "SELECT * FROM dbmodule6.songs ORDER BY RAND() LIMIT 5",nativeQuery = true)
+    Iterable<Songs> suggest5Songs();
 
+    @Query(value = "select songs.id, songs.audio, songs.avatar, songs.composer, songs.date, songs.name, songs.views, songs.id_users from songs inner join (select id_song, count(id_user) from like_user_song group by id_song order by count(id_user) desc limit 10) as view on songs.id = view.id_song", nativeQuery = true)
+    Iterable<Songs> findTop10SongsOrderByLike();
 
 }
