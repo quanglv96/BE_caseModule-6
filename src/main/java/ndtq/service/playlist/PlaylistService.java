@@ -61,6 +61,11 @@ public class PlaylistService implements IPlaylistService{
     }
 
     @Override
+    public Iterable<Playlist> listTop10PlaylistOrderByDateDesc() {
+        return iPlaylistRepository.findTop10PlaylistOrderByDateDesc();
+    }
+
+    @Override
     public Iterable<Playlist> findAllByUsers(Users users) {
         return iPlaylistRepository.findAllByUsers(users);
     }

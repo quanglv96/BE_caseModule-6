@@ -43,6 +43,11 @@ public class PlayListController {
     public ResponseEntity<Iterable<Playlist>> getTop10ViewsPlaylist() {
         return new ResponseEntity<>(playlistService.listTop10ViewsPlaylistTrending(), HttpStatus.OK);
     }
+
+    @GetMapping("/listTop10PlaylistOrderByDateDesc")
+    public ResponseEntity<Iterable<Playlist>> getTop10PlaylistOrderByDateDesc () {
+        return new ResponseEntity<>(playlistService.listTop10PlaylistOrderByDateDesc(), HttpStatus.OK);
+    }
     @GetMapping("/findPlaylistByUser/{id}")
     ResponseEntity<Iterable<Playlist>> listSongsByUser(@PathVariable("id") Long idUser) {
         return new ResponseEntity<>(playlistService.findAllByUsers(userService.findById(idUser).get()), HttpStatus.OK);
@@ -60,7 +65,7 @@ public class PlayListController {
         playlistService.remove(idPlaylist);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     ResponseEntity<Optional<Playlist>> findPlaylistById(@PathVariable("id") Long idPlaylist) {
         return new ResponseEntity<>(playlistService.findById(idPlaylist),HttpStatus.OK);
     }
