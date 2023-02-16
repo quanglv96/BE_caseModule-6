@@ -75,4 +75,9 @@ public class PlayListController {
         playlistService.save(playlist);
         return new ResponseEntity<>(playlistService.save(playlist),HttpStatus.OK);
     }
+
+    @GetMapping("/topLikePlaylist")
+    public ResponseEntity<Iterable<Playlist>> getTopLikePlaylist() {
+        return new ResponseEntity<>(playlistService.findTopLikePlaylist(),HttpStatus.OK);
+    }
 }

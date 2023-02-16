@@ -42,4 +42,9 @@ public interface IPlaylistRepository extends JpaRepository<Playlist, Long> {
     @Modifying
     @Query(value = "DELETE FROM dbmodule6.playlist_song WHERE id_playlist =  ?1", nativeQuery = true)
     void deletePlaylistInSongs(Long idPlaylist);
+
+    @Query(value = "select playlist.id, playlist.avatar, playlist.date_create, playlist.description, playlist.last_update, playlist.name, playlist.views,playlist.id_users from playlist" +
+            " right join (select id_playlist, count(id_user) from like_user_playlist group by id_playlist order by count(id_user) desc limit 10)" +
+            " as abc on playlist.id = abc.id_playlist;", nativeQuery = true)
+    Iterable<Playlist> findAllTopLikePlaylist();
 }

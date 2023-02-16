@@ -69,4 +69,9 @@ public class PlaylistService implements IPlaylistService{
     public Iterable<Playlist> findAllByNameContaining(String name) {
         return iPlaylistRepository.findAllByNameContaining(name);
     }
+
+    @Override
+    public Iterable<Playlist> findTopLikePlaylist() {
+        return iPlaylistRepository.findAllTopLikePlaylist();
+    }
 }
