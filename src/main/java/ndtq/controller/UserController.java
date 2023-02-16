@@ -49,8 +49,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Users> updateUser(@PathVariable Long id,
-                                            @RequestBody Users users) {
+    public ResponseEntity<Users> updateUser(@PathVariable Long id, @RequestBody Users users) {
         Optional<Users> user = userService.findById(id);
         if (user.isPresent()) {
             // set lại avt cũ khi k up ảnh
