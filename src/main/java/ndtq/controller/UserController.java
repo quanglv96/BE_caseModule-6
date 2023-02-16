@@ -53,7 +53,7 @@ public class UserController {
         Optional<Users> user = userService.findById(id);
         if (user.isPresent()) {
             // set lại avt cũ khi k up ảnh
-            if(users.getAvatar()==null){
+            if (users.getAvatar() == null){
                 users.setAvatar(user.get().getAvatar());
             }
             // lấy lại mật khẩu của user cũ gán cho user mới
