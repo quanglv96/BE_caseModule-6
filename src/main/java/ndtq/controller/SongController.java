@@ -45,6 +45,10 @@ public class SongController {
     public ResponseEntity<Iterable<Songs>> listSongsTrendingByViewAsc() {
         return new ResponseEntity<>(iSongService.listTrendingAsc(), HttpStatus.OK);
     }
+    @GetMapping("/listTop10SongsLikeTrending")
+    public ResponseEntity<Iterable<Songs>> listTop10SongsLikeTrending() {
+        return new ResponseEntity<>(iSongService.listTop10SongsLikeTrending(), HttpStatus.OK);
+    }
 
     @GetMapping("/listSongsByUser/{id}")
     ResponseEntity<Iterable<Songs>> listSongsByUser(@PathVariable("id") Long idUser) {

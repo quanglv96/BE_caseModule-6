@@ -56,6 +56,11 @@ public class PlaylistService implements IPlaylistService{
     }
 
     @Override
+    public Iterable<Playlist> listTop10ViewsPlaylistTrending() {
+        return iPlaylistRepository.findTop10PlaylistsOrderByViewDesc();
+    }
+
+    @Override
     public Iterable<Playlist> findAllByUsers(Users users) {
         return iPlaylistRepository.findAllByUsers(users);
     }
@@ -63,5 +68,10 @@ public class PlaylistService implements IPlaylistService{
     @Override
     public Iterable<Playlist> findAllByNameContaining(String name) {
         return iPlaylistRepository.findAllByNameContaining(name);
+    }
+
+    @Override
+    public Iterable<Playlist> findTopLikePlaylist() {
+        return iPlaylistRepository.findAllTopLikePlaylist();
     }
 }

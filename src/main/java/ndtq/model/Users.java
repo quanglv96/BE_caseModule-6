@@ -89,4 +89,13 @@ public class Users {
         this.avatar = avatar;
     }
 
+    public Users setChangeInfo(String name, String address, String email, String phone, String avatar, Users users) {
+        users.setName(name);
+        users.setAddress(address);
+        users.setEmail(email);
+        users.setPhone(phone);
+        users.setAvatar(avatar);
+        return users;
+    }
+
 }

@@ -58,5 +58,7 @@ public interface ISongRepository extends JpaRepository<Songs, Long> {
     @Query(value = "SELECT * FROM dbmodule6.songs ORDER BY RAND() LIMIT 5",nativeQuery = true)
     Iterable<Songs> suggest5Songs();
 
+    @Query(value = "select songs.id, songs.audio, songs.avatar, songs.composer, songs.date, songs.name, songs.views, songs.id_users from songs right join (select id_song, count(id_user) from like_user_song group by id_song order by count(id_user) desc limit 10) as view on songs.id = view.id_song", nativeQuery = true)
+    Iterable<Songs> findTop10SongsOrderByLike();
 
 }
