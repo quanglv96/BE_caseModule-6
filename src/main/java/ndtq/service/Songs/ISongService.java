@@ -12,9 +12,11 @@ public interface ISongService extends IGeneralService<Songs> {
     Iterable<Songs> listTrending();
     Iterable<Songs> listTrendingAsc();
     Iterable<Songs> listTop10SongsTrending();
+    Iterable<Songs> listTop10SongsLikeTrending();
     Iterable<Songs> findAllByNameContaining(String name);
     Iterable<Songs> listNewSongs();
     Iterable<Songs> findAllByUsers(Users users);
     Iterable<Songs> findAllBySingerList(Long id);
     Iterable<Songs> suggest5Songs();
+    void changeLike(Songs songs);
 }

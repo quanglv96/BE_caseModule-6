@@ -40,8 +40,8 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void updateUser(Long id, String name, String address, String email, String phone) {
-        iUserRepository.updateUser(id, name, address, email, phone);
+    public void updateUser(Long id, String name, String address, String email, String phone, String avatar) {
+        iUserRepository.updateUser(id, name, address, email, phone, avatar);
     }
 
     @Override

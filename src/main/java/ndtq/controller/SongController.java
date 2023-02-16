@@ -45,6 +45,10 @@ public class SongController {
     public ResponseEntity<Iterable<Songs>> listSongsTrendingByViewAsc() {
         return new ResponseEntity<>(iSongService.listTrendingAsc(), HttpStatus.OK);
     }
+    @GetMapping("/listTop10SongsLikeTrending")
+    public ResponseEntity<Iterable<Songs>> listTop10SongsLikeTrending() {
+        return new ResponseEntity<>(iSongService.listTop10SongsLikeTrending(), HttpStatus.OK);
+    }
 
     @GetMapping("/listSongsByUser/{id}")
     ResponseEntity<Iterable<Songs>> listSongsByUser(@PathVariable("id") Long idUser) {
@@ -78,6 +82,11 @@ public class SongController {
     }
     @GetMapping("/suggest")
     ResponseEntity<Iterable<Songs>> suggest5Songs() {
+        return new ResponseEntity<>(iSongService.suggest5Songs(), HttpStatus.OK);
+    }
+    @PutMapping("/like")
+    ResponseEntity<Iterable<Songs>> changeLike(@RequestBody Songs songs) {
+        iSongService.save(songs);
         return new ResponseEntity<>(iSongService.suggest5Songs(), HttpStatus.OK);
     }
 }
