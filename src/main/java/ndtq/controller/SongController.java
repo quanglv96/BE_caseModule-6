@@ -80,6 +80,11 @@ public class SongController {
     ResponseEntity<Iterable<Songs>> suggest5Songs() {
         return new ResponseEntity<>(iSongService.suggest5Songs(), HttpStatus.OK);
     }
+    @PutMapping("/like")
+    ResponseEntity<Iterable<Songs>> changeLike(@RequestBody Songs songs) {
+        iSongService.save(songs);
+        return new ResponseEntity<>(iSongService.suggest5Songs(), HttpStatus.OK);
+    }
 }
 
 

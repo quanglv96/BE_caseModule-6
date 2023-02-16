@@ -93,4 +93,9 @@ public class SongService implements ISongService {
         return isongRepository.suggest5Songs();
     }
 
+    @Override
+    public void changeLike(Songs songs) {
+        isongRepository.save(songs);
+    }
+
 }

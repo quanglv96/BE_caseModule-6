@@ -43,6 +43,10 @@ public class CommentController {
         LocalDateTime date = LocalDateTime.now();
         comments.setDate(date);
         iCommentService.save(comments);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        if(comments.getSongs()!=null){
+            return  new ResponseEntity<>(iCommentService.findAllBySongsOrderByDateDesc(comments.getSongs()),HttpStatus.OK);
+        }else {
+            return  new ResponseEntity<>(iCommentService.findAllByPlaylistOrderByDateDesc(comments.getPlaylist()),HttpStatus.OK);
+        }
     }
 }
