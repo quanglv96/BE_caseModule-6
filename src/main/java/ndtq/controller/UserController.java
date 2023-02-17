@@ -21,10 +21,11 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam("username") String username, @RequestParam("pass") String pass) {
-        Optional<Users> users = userService.findUserByUsername(username);
+    public ResponseEntity<?> login(@RequestBody Users user) {
+        String name = user.getUsername();
+        Optional<Users> users = userService.findUserByUsername(name);
         if (users.isPresent()) {
-            if (Objects.equals(pass, users.get().getPassword())) {
+            if (Objects.equals(user.getPassword(), users.get().getPassword())) {
                 return new ResponseEntity<>(users, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Wrong Password", HttpStatus.NOT_FOUND);
