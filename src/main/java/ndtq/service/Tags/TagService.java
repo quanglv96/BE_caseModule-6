@@ -1,18 +1,24 @@
 package ndtq.service.Tags;
 
+import ndtq.model.Songs;
 import ndtq.model.Tags;
+import ndtq.repository.ISongRepository;
 import ndtq.repository.ITagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 public class TagService implements ITagService {
     @Autowired
     public ITagRepository iTagRepository;
+    @Autowired
+    public ISongRepository iSongRepository;
 
     @Override
     public Iterable<Tags> findAll() {
@@ -70,4 +76,20 @@ public class TagService implements ITagService {
         }
     }
 
+    @Override
+    public Iterable<BigInteger> findIdSongByTag(Long id) {
+        return iTagRepository.findIdSongByTag(id);
+    }
+
+    @Override
+    public Iterable<Songs> listSongByTag(Long id) {
+        Iterable<BigInteger> listSongId = iTagRepository.findIdSongByTag(id);
+        List<Songs> songsList = new ArrayList<>();
+        for (BigInteger i: listSongId) {
+            Long songId = i.longValue();
+            Songs songs = iSongRepository.findById(songId).get();
+            songsList.add(songs);
+        }
+        return songsList;
+    }
 }
