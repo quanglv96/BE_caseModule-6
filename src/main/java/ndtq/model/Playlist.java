@@ -23,7 +23,7 @@ public class Playlist {
     private LocalDate lastUpdate;
     // ngày cập nhập lần cuối
 
-    @OneToOne(targetEntity = Users.class)
+    @ManyToOne(targetEntity = Users.class)
     @JoinColumn(name = "id_users")
     private Users users;// ngươi tạo playlist
     @ManyToMany(targetEntity = Songs.class)
