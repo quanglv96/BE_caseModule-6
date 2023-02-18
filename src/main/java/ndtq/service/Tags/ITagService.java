@@ -1,6 +1,7 @@
 package ndtq.service.Tags;
 
 
+import ndtq.model.Playlist;
 import ndtq.model.Songs;
 import ndtq.model.Tags;
 import ndtq.service.IGeneralService;
@@ -17,6 +18,8 @@ public interface ITagService extends IGeneralService<Tags> {
     void addPlaylistTag(Long idPlaylist,Long idTag);
     Iterable<BigInteger> findIdSongByTag(Long id);
     Iterable<Songs> listSongByTag(Long id);
+    Iterable<BigInteger> findIdPlaylistByTag(Long id);
+    Iterable<Playlist> listPlaylistByTag(Long id);
 
 
 }

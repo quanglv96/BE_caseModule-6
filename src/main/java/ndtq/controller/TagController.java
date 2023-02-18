@@ -1,6 +1,7 @@
 package ndtq.controller;
 
 
+import ndtq.model.Playlist;
 import ndtq.model.Songs;
 import ndtq.service.Songs.ISongService;
 import ndtq.service.Tags.ITagService;
@@ -20,8 +21,14 @@ public class TagController {
     @Autowired
     private ITagService iTagService;
 
-    @GetMapping("{id}")
+    @GetMapping("/songs/{id}")
     ResponseEntity<Iterable<Songs>> listSongsByTagsList(@PathVariable("id") Long id) {
         return new ResponseEntity<>(iTagService.listSongByTag(id), HttpStatus.OK);
     }
+
+    @GetMapping("/playlist/{id}")
+    ResponseEntity<Iterable<Playlist>> listPlaylistsByTagsList(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(iTagService.listPlaylistByTag(id), HttpStatus.OK);
+    }
+
 }
