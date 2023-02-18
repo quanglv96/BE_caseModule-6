@@ -21,12 +21,12 @@ public class TagController {
     @Autowired
     private ITagService iTagService;
 
-    @GetMapping("/songs/{id}")
+    @GetMapping("/findSongsByTag/{id}")
     ResponseEntity<Iterable<Songs>> listSongsByTagsList(@PathVariable("id") Long id) {
         return new ResponseEntity<>(iTagService.listSongByTag(id), HttpStatus.OK);
     }
 
-    @GetMapping("/playlist/{id}")
+    @GetMapping("/findPlaylistByTag/{id}")
     ResponseEntity<Iterable<Playlist>> listPlaylistsByTagsList(@PathVariable("id") Long id) {
         return new ResponseEntity<>(iTagService.listPlaylistByTag(id), HttpStatus.OK);
     }
