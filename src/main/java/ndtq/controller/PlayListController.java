@@ -90,4 +90,10 @@ public class PlayListController {
         playlistService.save(playlist);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @PutMapping("/changeSongToPlaylist")
+    ResponseEntity<Iterable<Songs>> changeSongToPlaylist(@RequestBody Playlist playlist) {
+        playlist.setLastUpdate(LocalDate.now());
+        playlistService.save(playlist);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

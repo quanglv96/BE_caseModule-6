@@ -88,6 +88,12 @@ public class SongController {
         iSongService.save(songs);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/singer/{id}")
+    public ResponseEntity<Iterable<Songs>> getAllSongBySinger(@PathVariable Long id) {
+        Iterable<Songs> songs = iSongService.findAllBySingerList(id);
+        return new ResponseEntity<>(iSongService.findAllBySingerList(id), HttpStatus.OK);
+    }
 }
 
 
