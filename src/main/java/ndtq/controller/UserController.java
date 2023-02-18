@@ -76,15 +76,12 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
-    @PutMapping("/changePass/{id}")
-    public ResponseEntity<Users> updatePass(@PathVariable Long id,
-                                            @RequestParam String password) {
-        Optional<Users> usersOptional = userService.findById(id);
+    @PutMapping("/changePass")
+    public ResponseEntity<?> updatePass(@RequestBody Users users) {
+        Optional<Users> usersOptional = userService.findById(users.getId());
         if (usersOptional.isPresent()) {
-            userService.updatePass(id, password);
-            Users user = userService.findById(id).get();
-            user.setPassword(password);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            userService.updatePass(users.getId(), users.getPassword());
+            return ResponseEntity.status( HttpStatus.OK).build();
         }
         return new ResponseEntity<>(HttpStatus.CONFLICT);
 

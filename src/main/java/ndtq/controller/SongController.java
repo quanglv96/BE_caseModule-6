@@ -57,7 +57,6 @@ public class SongController {
     @PostMapping()
     ResponseEntity<?> save(@RequestBody Songs songs) {
         songs.setDate(LocalDate.now());
-        songs.setViews(1000);
         iSongService.save(songs);
         return new ResponseEntity<>( HttpStatus.OK);
     }
@@ -88,6 +87,12 @@ public class SongController {
     ResponseEntity<Iterable<Songs>> changeLike(@RequestBody Songs songs) {
         iSongService.save(songs);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/singer/{id}")
+    public ResponseEntity<Iterable<Songs>> getAllSongBySinger(@PathVariable Long id) {
+        Iterable<Songs> songs = iSongService.findAllBySingerList(id);
+        return new ResponseEntity<>(iSongService.findAllBySingerList(id), HttpStatus.OK);
     }
 }
 
