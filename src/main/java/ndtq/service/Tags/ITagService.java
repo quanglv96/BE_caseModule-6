@@ -20,6 +20,7 @@ public interface ITagService extends IGeneralService<Tags> {
     Iterable<Songs> listSongByTag(Long id);
     Iterable<BigInteger> findIdPlaylistByTag(Long id);
     Iterable<Playlist> listPlaylistByTag(Long id);
+    Iterable<Tags> hint5Tags();
 
 
 }
