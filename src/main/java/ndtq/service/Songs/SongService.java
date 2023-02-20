@@ -7,7 +7,6 @@ import ndtq.model.Tags;
 import ndtq.model.Users;
 import ndtq.repository.ISongRepository;
 import ndtq.service.Singer.ISingerService;
-import ndtq.service.Singer.SingerService;
 import ndtq.service.Tags.ITagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -94,7 +93,7 @@ public class SongService implements ISongService {
 
     @Override
     public  Iterable<Songs> suggest5Songs() {
-        return isongRepository.suggest5Songs();
+        return isongRepository.hint5Songs();
     }
 
     @Override

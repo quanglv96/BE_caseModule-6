@@ -57,7 +57,6 @@ public class SongController {
     @PostMapping()
     ResponseEntity<?> save(@RequestBody Songs songs) {
         songs.setDate(LocalDate.now());
-        songs.setViews(1000);
         iSongService.save(songs);
         return new ResponseEntity<>( HttpStatus.OK);
     }

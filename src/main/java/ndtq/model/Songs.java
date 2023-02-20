@@ -32,7 +32,7 @@ public class Songs {
     @JoinTable( name = "song_tag",joinColumns = {@JoinColumn(name = "id_song")},
             inverseJoinColumns = {@JoinColumn(name = "id_tags")})
     private List<Tags> tagsList;
-    private long views;
+    private Long views;
     @ManyToMany(targetEntity = Users.class)
     @JoinTable( name = "like_user_song",joinColumns = {@JoinColumn(name = "id_song")},
             inverseJoinColumns = {@JoinColumn(name = "id_user")})
@@ -47,7 +47,7 @@ public class Songs {
 
     }
 
-    public Songs(Long id, String name, String audio, String avatar, Users users, List<Singer> singerList, String composer, LocalDate date, List<Tags> tagsList, long views, List<Users> userLikeSong) {
+    public Songs(Long id, String name, String audio, String avatar, Users users, List<Singer> singerList, String composer, LocalDate date, List<Tags> tagsList, Long views, List<Users> userLikeSong) {
         this.id = id;
         this.name = name;
         this.audio = audio;
@@ -64,7 +64,7 @@ public class Songs {
     public Songs() {
     }
 
-    public Songs(String name, String audio, String avatar, Users users, List<Singer> singerList, String composer, LocalDate date, List<Tags> tagsList, long views, List<Users> userLikeSong) {
+    public Songs(String name, String audio, String avatar, Users users, List<Singer> singerList, String composer, LocalDate date, List<Tags> tagsList, Long views, List<Users> userLikeSong) {
         this.name = name;
         this.audio = audio;
         this.avatar = avatar;
@@ -72,7 +72,7 @@ public class Songs {
         this.singerList = singerList;
         this.composer = composer;
         this.date = date;
-        this.tagsList = tagsList;
+                this.tagsList = tagsList;
         this.views = views;
         this.userLikeSong = userLikeSong;
     }

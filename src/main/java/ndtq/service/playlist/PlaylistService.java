@@ -30,8 +30,10 @@ public class PlaylistService implements IPlaylistService{
 
     @Override
     public Playlist save(Playlist playlist) {
-        List<Tags> tagsList = (List<Tags>) tagService.StringToListObj(playlist.getTagsList());
-        playlist.setTagsList(tagsList);
+        if (playlist.getTagsList() != null) {
+            List<Tags> tagsList = (List<Tags>) tagService.StringToListObj(playlist.getTagsList());
+            playlist.setTagsList(tagsList);
+        }
         playlist=iPlaylistRepository.save(playlist);
         return playlist;
     }

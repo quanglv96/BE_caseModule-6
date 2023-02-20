@@ -23,7 +23,7 @@ public class Playlist {
     private LocalDate lastUpdate;
     // ngày cập nhập lần cuối
 
-    @OneToOne(targetEntity = Users.class)
+    @ManyToOne(targetEntity = Users.class)
     @JoinColumn(name = "id_users")
     private Users users;// ngươi tạo playlist
     @ManyToMany(targetEntity = Songs.class)
@@ -35,7 +35,7 @@ public class Playlist {
             joinColumns = {@JoinColumn(name = "id_playlist")},
             inverseJoinColumns = {@JoinColumn(name = "id_tags")})
     private List<Tags> tagsList;
-    private long views;
+    private Long views;
     @ManyToMany(targetEntity = Users.class)
     @JoinTable(name = "like_user_playlist", joinColumns = {@JoinColumn(name = "id_playlist")},
             inverseJoinColumns = {@JoinColumn(name = "id_user")})

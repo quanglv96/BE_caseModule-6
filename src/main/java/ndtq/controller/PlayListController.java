@@ -1,6 +1,7 @@
 package ndtq.controller;
 import ndtq.model.Playlist;
 import ndtq.model.Songs;
+import ndtq.model.Tags;
 import ndtq.service.playlist.IPlaylistService;
 import ndtq.service.users.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -73,6 +75,7 @@ public class PlayListController {
     ResponseEntity<Playlist> updatePlaylist(@PathVariable("id") Long idPlaylist, @RequestBody Playlist playlist) {
         Playlist oldPlaylist= playlistService.findById(idPlaylist).get();
         playlist.setId(idPlaylist);
+        playlist.setSongsList(oldPlaylist.getSongsList());
         playlist.setDateCreate(oldPlaylist.getDateCreate());
         playlist.setLastUpdate(LocalDate.now());
         playlist.setUserLikesPlaylist(oldPlaylist.getUserLikesPlaylist());
@@ -93,6 +96,10 @@ public class PlayListController {
     @PutMapping("/changeSongToPlaylist")
     ResponseEntity<Iterable<Songs>> changeSongToPlaylist(@RequestBody Playlist playlist) {
         playlist.setLastUpdate(LocalDate.now());
+        if(playlist.getId()==null){
+            playlist.setAvatar("https://firebasestorage.googleapis.com/v0/b/upload-file-540c6.appspot.com/o/image%2Ft%E1%BA%A3i%20xu%E1%BB%91ng.png?alt=media&token=4c279154-4518-48ec-bb90-78dd2a3f0b92");
+            playlist.setDateCreate(LocalDate.now());
+        }
         playlistService.save(playlist);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -1,5 +1,8 @@
 package ndtq.controller;
 
+import ndtq.model.Role;
+import ndtq.model.Songs;
+import ndtq.model.Tags;
 import ndtq.model.Users;
 import ndtq.service.users.IUserService;
 import org.apache.catalina.User;
@@ -8,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -46,6 +50,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         user.setAvatar("https://iupac.org/wp-content/uploads/2018/05/default-avatar.png");
+        user.setRole(new Role(1L,"USER"));
         return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
     }
 
