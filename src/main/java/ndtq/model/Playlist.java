@@ -2,11 +2,10 @@ package ndtq.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
+
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -19,8 +18,8 @@ public class Playlist {
     private String name;
     private String description; // mô tả nội dung bài hát
     private String avatar;
-    private LocalDate dateCreate; // ngày tạo
-    private LocalDate lastUpdate;
+    private LocalDateTime dateCreate; // ngày tạo
+    private LocalDateTime lastUpdate;
     // ngày cập nhập lần cuối
 
     @ManyToOne(targetEntity = Users.class)
@@ -41,7 +40,7 @@ public class Playlist {
             inverseJoinColumns = {@JoinColumn(name = "id_user")})
     private List<Users> userLikesPlaylist;
 
-    public Playlist(String name, String description, LocalDate dateCreate, LocalDate lastUpdate, Users users, List<Songs> songsList, List<Tags> tagsList, long views, List<Users> userLikesPlaylist) {
+    public Playlist(String name, String description, LocalDateTime dateCreate, LocalDateTime lastUpdate, Users users, List<Songs> songsList, List<Tags> tagsList, long views, List<Users> userLikesPlaylist) {
         this.name = name;
         this.description = description;
         this.dateCreate = dateCreate;
@@ -53,7 +52,7 @@ public class Playlist {
         this.userLikesPlaylist = userLikesPlaylist;
     }
 
-    public Playlist(String name, String description, String avatar, LocalDate dateCreate, LocalDate lastUpdate, Users users) {
+    public Playlist(String name, String description, String avatar, LocalDateTime dateCreate, LocalDateTime lastUpdate, Users users) {
         this.name = name;
         this.description = description;
         this.avatar = avatar;
@@ -62,7 +61,7 @@ public class Playlist {
         this.users = users;
     }
 
-    public Playlist(String name, String description, String avatar, LocalDate dateCreate, LocalDate lastUpdate, Users users, List<Tags> tagsList, long views, List<Users> userLikesPlaylist) {
+    public Playlist(String name, String description, String avatar, LocalDateTime dateCreate, LocalDateTime lastUpdate, Users users, List<Tags> tagsList, long views, List<Users> userLikesPlaylist) {
         this.name = name;
         this.description = description;
         this.avatar = avatar;
@@ -74,7 +73,7 @@ public class Playlist {
         this.userLikesPlaylist = userLikesPlaylist;
     }
 
-    public Playlist(String name, String description, String avatar, LocalDate dateCreate, LocalDate lastUpdate, Users users, long views, List<Users> userLikesPlaylist) {
+    public Playlist(String name, String description, String avatar, LocalDateTime dateCreate, LocalDateTime lastUpdate, Users users, long views, List<Users> userLikesPlaylist) {
         this.name = name;
         this.description = description;
         this.avatar = avatar;
@@ -85,7 +84,7 @@ public class Playlist {
         this.userLikesPlaylist = userLikesPlaylist;
     }
 
-    public Playlist(Long id, String name, String description, String avatar, LocalDate dateCreate, LocalDate lastUpdate, Users users, List<Songs> songsList, List<Tags> tagsList, long views, List<Users> userLikesPlaylist) {
+    public Playlist(Long id, String name, String description, String avatar, LocalDateTime dateCreate, LocalDateTime lastUpdate, Users users, List<Songs> songsList, List<Tags> tagsList, long views, List<Users> userLikesPlaylist) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -99,7 +98,7 @@ public class Playlist {
         this.userLikesPlaylist = userLikesPlaylist;
     }
 
-    public Playlist(String name, String description, String avatar, LocalDate dateCreate, LocalDate lastUpdate, Users users, List<Songs> songsList, List<Tags> tagsList, long views, List<Users> userLikesPlaylist) {
+    public Playlist(String name, String description, String avatar, LocalDateTime dateCreate, LocalDateTime lastUpdate, Users users, List<Songs> songsList, List<Tags> tagsList, long views, List<Users> userLikesPlaylist) {
         this.name = name;
         this.description = description;
         this.avatar = avatar;
@@ -115,7 +114,7 @@ public class Playlist {
     public Playlist() {
     }
 
-    public Playlist(String name, String description, String avatar, LocalDate dateCreate, LocalDate lastUpdate, Users users, List<Tags> tagsList, long views) {
+    public Playlist(String name, String description, String avatar, LocalDateTime dateCreate, LocalDateTime lastUpdate, Users users, List<Tags> tagsList, long views) {
         this.name = name;
         this.description = description;
         this.avatar = avatar;

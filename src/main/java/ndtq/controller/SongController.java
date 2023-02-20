@@ -1,21 +1,13 @@
 package ndtq.controller;
-
-
 import ndtq.model.*;
-import ndtq.service.Singer.ISingerService;
 import ndtq.service.Songs.ISongService;
-import ndtq.service.Tags.ITagService;
-import ndtq.service.comment.ICommentService;
 import ndtq.service.users.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
@@ -56,7 +48,7 @@ public class SongController {
     }
     @PostMapping()
     ResponseEntity<?> save(@RequestBody Songs songs) {
-        songs.setDate(LocalDate.now());
+        songs.setDate(LocalDateTime.now());
         iSongService.save(songs);
 
         return new ResponseEntity<>( HttpStatus.OK);
@@ -80,9 +72,9 @@ public class SongController {
         iSongService.save(newSongs);
         return new ResponseEntity<>(iSongService.findById(idSong), HttpStatus.OK);
     }
-    @GetMapping("/suggest")
-    ResponseEntity<Iterable<Songs>> suggest5Songs() {
-        return new ResponseEntity<>(iSongService.suggest5Songs(), HttpStatus.OK);
+    @GetMapping("/suggest/{idSongNow}")
+    ResponseEntity<Iterable<Songs>> suggest5Songs(@PathVariable("idSongNow") Long idSongNow) {
+        return new ResponseEntity<>(iSongService.suggest5Songs(idSongNow), HttpStatus.OK);
     }
     @PutMapping("/like")
     ResponseEntity<Iterable<Songs>> changeLike(@RequestBody Songs songs) {
@@ -92,7 +84,6 @@ public class SongController {
 
     @GetMapping("/singer/{id}")
     public ResponseEntity<Iterable<Songs>> getAllSongBySinger(@PathVariable Long id) {
-        Iterable<Songs> songs = iSongService.findAllBySingerList(id);
         return new ResponseEntity<>(iSongService.findAllBySingerList(id), HttpStatus.OK);
     }
 }

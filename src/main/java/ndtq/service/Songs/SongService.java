@@ -92,8 +92,8 @@ public class SongService implements ISongService {
     }
 
     @Override
-    public  Iterable<Songs> suggest5Songs() {
-        return isongRepository.hint5Songs();
+    public  Iterable<Songs> suggest5Songs(Long idSongNow) {
+        return isongRepository.hint5Songs(idSongNow);
     }
 
     @Override
