@@ -20,6 +20,12 @@ public interface IPlaylistRepository extends JpaRepository<Playlist, Long> {
     Iterable<Playlist> findAllByUsers(Users users);
 
     Iterable<Playlist> findAllByNameContaining(String name);
+    @Query(value = "select * from playlist where id in (select id_playlist from playlist_tag where id_tags in " +
+                   "(select id from tags where tags.name = :name))", nativeQuery = true)
+    Iterable<Playlist> findAllByTagsList(String name);
+
+    @Query(value = "select * from playlist where id in (select id_playlist from playlist_tag where id_tags = :id)", nativeQuery = true)
+    Iterable<Playlist> findPlaylistByTags( Long id);
 
     @Modifying
     @Query(value = "update Playlist set views=(views+ 1)", nativeQuery = true)

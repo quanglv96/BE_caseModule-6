@@ -79,4 +79,14 @@ public class PlaylistService implements IPlaylistService{
     public Iterable<Playlist> findTopLikePlaylist() {
         return iPlaylistRepository.findAllTopLikePlaylist();
     }
+
+    @Override
+    public Iterable<Playlist> findPlaylistByTags(Long id) {
+        return iPlaylistRepository.findPlaylistByTags(id);
+    }
+
+    @Override
+    public Iterable<Playlist> findAllByTaglists(String name) {
+        return iPlaylistRepository.findAllByTagsList(name);
+    }
 }

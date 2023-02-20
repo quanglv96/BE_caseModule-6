@@ -96,4 +96,18 @@ public class PlayListController {
         playlistService.save(playlist);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/taglist")
+    public ResponseEntity<?> getAllPlaylistByTaglist(@RequestParam("search") String name) {
+        List<Playlist> playlists = (List<Playlist>) playlistService.findAllByTaglists(name);
+        if(!playlists.isEmpty()) {
+            return new ResponseEntity<>(playlistService.findAllByTaglists(name), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/taglist/{id}")
+    public ResponseEntity<Iterable<Playlist>> GetAllPlaylistByTag(@PathVariable Long id) {
+        return new ResponseEntity<>(playlistService.findPlaylistByTags(id), HttpStatus.OK);
+        }
 }
