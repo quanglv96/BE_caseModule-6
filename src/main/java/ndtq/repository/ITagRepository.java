@@ -19,16 +19,16 @@ public interface ITagRepository extends JpaRepository<Tags, Long> {
     Optional<Tags> findTagsByName(String name);
 
     @Modifying
-    @Query(value = "INSERT INTO dbmodule6.song_tag (id_song, id_tags)VALUES (?1, ?2)", nativeQuery = true)
+    @Query(value = "INSERT INTO song_tag (id_song, id_tags)VALUES (?1, ?2)", nativeQuery = true)
     void addSongTag(Long idSong,Long idTag);
     @Transactional
     @Modifying()
-    @Query(value ="INSERT INTO dbmodule6.playlist_tag (id_playlist, id_tags) VALUES (?1, ?2)", nativeQuery = true)
+    @Query(value ="INSERT INTO playlist_tag (id_playlist, id_tags) VALUES (?1, ?2)", nativeQuery = true)
     void addPlaylistTag(Long idPlaylist,Long idTag);
 
-    @Query(value = "SELECT count(*) FROM dbmodule6.song_tag where id_song=?1 and id_tags=?2" ,nativeQuery = true)
+    @Query(value = "SELECT count(*) FROM song_tag where id_song=?1 and id_tags=?2" ,nativeQuery = true)
     Integer checkSongTag(Long idSong,Long idTag);
-    @Query(value = "SELECT count(*) FROM dbmodule6.playlist_tag where id_playlist=?1 and id_tags=?2" ,nativeQuery = true)
+    @Query(value = "SELECT count(*) FROM playlist_tag where id_playlist=?1 and id_tags=?2" ,nativeQuery = true)
     Integer checkPlaylistTag(Long idPlaylist,Long idTag);
     @Query(value = "select song_tag.id_song from song_tag where id_tags = ?1", nativeQuery = true)
     Iterable<BigInteger> findIdSongByTag(Long id);

@@ -31,10 +31,10 @@ public interface IUserRepository extends JpaRepository<Users, Long> {
 
     int countUsersByUsername(String name);
 
-    @Query(value = "select username from dbmodule6.users", nativeQuery = true)
+    @Query(value = "select username from users", nativeQuery = true)
     List<String> findAllUsername();
-    @Query(value = "select count(*) from dbmodule6.songs where id_users=?1", nativeQuery = true)
+    @Query(value = "select count(*) from songs where id_users=?1", nativeQuery = true)
     int countSongByUser(Long id);
-    @Query(value = "select count(*) from dbmodule6.playlist where id_users=?1", nativeQuery = true)
+    @Query(value = "select count(*) from playlist where id_users=?1", nativeQuery = true)
     int countPlaylistByUser(Long id);
 }
