@@ -6,6 +6,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -27,7 +28,7 @@ public class Songs {
             inverseJoinColumns = {@JoinColumn(name = "id_singer")})
     private List<Singer> singerList;
     private String composer; // người sáng tác
-    private LocalDate date;
+    private LocalDateTime date;
     @ManyToMany(targetEntity = Tags.class)
     @JoinTable( name = "song_tag",joinColumns = {@JoinColumn(name = "id_song")},
             inverseJoinColumns = {@JoinColumn(name = "id_tags")})
@@ -38,7 +39,7 @@ public class Songs {
             inverseJoinColumns = {@JoinColumn(name = "id_user")})
     private List<Users> userLikeSong;
 
-    public Songs(String name, List<Singer> singerList, String composer, LocalDate date, List<Tags> tagsList) {
+    public Songs(String name, List<Singer> singerList, String composer, LocalDateTime date, List<Tags> tagsList) {
         this.name = name;
         this.singerList = singerList;
         this.composer = composer;
@@ -47,7 +48,7 @@ public class Songs {
 
     }
 
-    public Songs(Long id, String name, String audio, String avatar, Users users, List<Singer> singerList, String composer, LocalDate date, List<Tags> tagsList, Long views, List<Users> userLikeSong) {
+    public Songs(Long id, String name, String audio, String avatar, Users users, List<Singer> singerList, String composer, LocalDateTime date, List<Tags> tagsList, Long views, List<Users> userLikeSong) {
         this.id = id;
         this.name = name;
         this.audio = audio;
@@ -64,7 +65,7 @@ public class Songs {
     public Songs() {
     }
 
-    public Songs(String name, String audio, String avatar, Users users, List<Singer> singerList, String composer, LocalDate date, List<Tags> tagsList, Long views, List<Users> userLikeSong) {
+    public Songs(String name, String audio, String avatar, Users users, List<Singer> singerList, String composer, LocalDateTime date, List<Tags> tagsList, Long views, List<Users> userLikeSong) {
         this.name = name;
         this.audio = audio;
         this.avatar = avatar;

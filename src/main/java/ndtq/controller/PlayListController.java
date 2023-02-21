@@ -1,20 +1,13 @@
 package ndtq.controller;
 import ndtq.model.Playlist;
 import ndtq.model.Songs;
-import ndtq.model.Tags;
 import ndtq.service.playlist.IPlaylistService;
 import ndtq.service.users.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @RestController
@@ -56,8 +49,8 @@ public class PlayListController {
     }
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Playlist playlist) {
-        LocalDate date_create = LocalDate.now();
-        LocalDate last_update = LocalDate.now();
+        LocalDateTime date_create = LocalDateTime.now();
+        LocalDateTime last_update = LocalDateTime.now();
         Playlist newUser = new Playlist(playlist.getName(), playlist.getDescription(), playlist.getAvatar(), date_create, last_update, playlist.getUsers(),playlist.getTagsList(), 200);
         playlistService.save(newUser);
         return ResponseEntity.status(HttpStatus.OK).build();
@@ -77,7 +70,7 @@ public class PlayListController {
         playlist.setId(idPlaylist);
         playlist.setSongsList(oldPlaylist.getSongsList());
         playlist.setDateCreate(oldPlaylist.getDateCreate());
-        playlist.setLastUpdate(LocalDate.now());
+        playlist.setLastUpdate(LocalDateTime.now());
         playlist.setUserLikesPlaylist(oldPlaylist.getUserLikesPlaylist());
         playlist.setViews(oldPlaylist.getViews());
         playlistService.save(playlist);
@@ -95,10 +88,10 @@ public class PlayListController {
     }
     @PutMapping("/changeSongToPlaylist")
     ResponseEntity<Iterable<Songs>> changeSongToPlaylist(@RequestBody Playlist playlist) {
-        playlist.setLastUpdate(LocalDate.now());
+        playlist.setLastUpdate(LocalDateTime.now());
         if(playlist.getId()==null){
             playlist.setAvatar("https://firebasestorage.googleapis.com/v0/b/upload-file-540c6.appspot.com/o/image%2Ft%E1%BA%A3i%20xu%E1%BB%91ng.png?alt=media&token=4c279154-4518-48ec-bb90-78dd2a3f0b92");
-            playlist.setDateCreate(LocalDate.now());
+            playlist.setDateCreate(LocalDateTime.now());
         }
         playlistService.save(playlist);
         return new ResponseEntity<>(HttpStatus.OK);

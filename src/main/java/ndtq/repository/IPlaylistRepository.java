@@ -32,24 +32,24 @@ public interface IPlaylistRepository extends JpaRepository<Playlist, Long> {
     @Query(value = "update Playlist set views=(views+ 1)", nativeQuery = true)
     void setViewsAllPlaylist();
 
-    @Query (value = "select * from dbmodule6.playlist order by views desc limit 10", nativeQuery = true)
+    @Query (value = "select * from playlist order by views desc limit 10", nativeQuery = true)
     Iterable<Playlist> findTop10PlaylistsOrderByViewDesc();
 
-    @Query(value = "select * from dbmodule6.playlist order by last_update desc limit 10", nativeQuery = true)
+    @Query(value = "select * from playlist order by last_update desc limit 10", nativeQuery = true)
     Iterable<Playlist> findTop10PlaylistOrderByDateDesc();
     @Modifying
-    @Query(value = "DELETE FROM dbmodule6.playlist_tag WHERE id_playlist = ?1", nativeQuery = true)
+    @Query(value = "DELETE FROM playlist_tag WHERE id_playlist = ?1", nativeQuery = true)
     void deletePlaylistInTag(Long idPlaylist);
 
     @Modifying
-    @Query(value = "DELETE FROM dbmodule6.like_user_playlist WHERE id_playlist = ?1", nativeQuery = true)
+    @Query(value = "DELETE FROM like_user_playlist WHERE id_playlist = ?1", nativeQuery = true)
     void deletePlaylistInLike(Long idPlaylist);
     @Modifying
-    @Query(value = "DELETE FROM dbmodule6.comments WHERE id_playlist = ?1", nativeQuery = true)
+    @Query(value = "DELETE FROM comments WHERE id_playlist = ?1", nativeQuery = true)
     void deletePlaylistInComment(Long idPlaylist);
 
     @Modifying
-    @Query(value = "DELETE FROM dbmodule6.playlist_song WHERE id_playlist =  ?1", nativeQuery = true)
+    @Query(value = "DELETE FROM playlist_song WHERE id_playlist =  ?1", nativeQuery = true)
     void deletePlaylistInSongs(Long idPlaylist);
 
     @Query(value = "select playlist.id," +
