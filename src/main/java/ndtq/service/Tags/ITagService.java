@@ -12,6 +12,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public interface ITagService extends IGeneralService<Tags> {
+
     Iterable<Tags> StringToListObj(List<Tags> listTag);
     void saveListTag(List<String> listTag);
     void addSongTag(Long idSong, Long idTag);
@@ -22,5 +23,5 @@ public interface ITagService extends IGeneralService<Tags> {
     Iterable<Playlist> listPlaylistByTag(Long id);
     Iterable<Tags> hint5Tags();
 
-
+    Iterable<Tags> get15Tag();
 }

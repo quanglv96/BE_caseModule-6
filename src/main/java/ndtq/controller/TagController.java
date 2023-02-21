@@ -32,4 +32,9 @@ public class TagController {
         return new ResponseEntity<>(iTagService.hint5Tags(), HttpStatus.OK);
     }
 
+    @GetMapping()
+    public ResponseEntity<Iterable<Tags>> getAllTag() {
+        return new ResponseEntity<>(iTagService.get15Tag(), HttpStatus.OK);
+    }
+
 }

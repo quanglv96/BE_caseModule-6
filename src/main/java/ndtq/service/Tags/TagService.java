@@ -118,4 +118,9 @@ public class TagService implements ITagService {
     public Iterable<Tags> hint5Tags() {
         return iTagRepository.hint5Tags();
     }
+
+    @Override
+    public Iterable<Tags> get15Tag() {
+        return iTagRepository.get15Tag();
+    }
 }
