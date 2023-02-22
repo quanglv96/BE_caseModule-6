@@ -23,5 +23,5 @@ public interface ITagService extends IGeneralService<Tags> {
     Iterable<Playlist> listPlaylistByTag(Long id);
     Iterable<Tags> hint5Tags();
 
-    Iterable<Tags> get15Tag();
+    Iterable<Tags> get10Tag();
 }

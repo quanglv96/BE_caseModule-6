@@ -6,6 +6,7 @@ import ndtq.model.Songs;
 import ndtq.model.Users;
 import ndtq.service.Singer.ISingerService;
 import ndtq.service.Songs.ISongService;
+import ndtq.service.Tags.ITagService;
 import ndtq.service.playlist.IPlaylistService;
 import ndtq.service.users.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class SearchController {
     private IPlaylistService iPlaylistService;
     @Autowired
     private IUserService iUserService;
+    @Autowired
+    private ITagService iTagService;
 
 
     @GetMapping
@@ -60,5 +63,15 @@ public class SearchController {
     @GetMapping("/songsBySinger")
     public ResponseEntity<Iterable<Songs>> findSongBySinger(@RequestParam("idSinger") Long idSinger){
         return new ResponseEntity<>(iSongService.findAllBySingerList(idSinger),HttpStatus.OK);
+    }
+
+    @GetMapping("/tag/{id}")
+    public ResponseEntity<Object> getAllPlaylistAndSongByTag(@PathVariable Long id) {
+        List<Object> playAndSong = new ArrayList<>();
+//        playAndSong.add(iPlaylistService.findPlaylistByTags(id));
+//        playAndSong.add(iSongService.getAllSongByTag(id));
+        playAndSong.add(iTagService.listPlaylistByTag(id));
+        playAndSong.add(iTagService.listSongByTag(id));
+        return new ResponseEntity<>(playAndSong, HttpStatus.OK);
     }
 }

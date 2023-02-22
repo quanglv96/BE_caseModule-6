@@ -86,6 +86,11 @@ public class SongController {
     public ResponseEntity<Iterable<Songs>> getAllSongBySinger(@PathVariable Long id) {
         return new ResponseEntity<>(iSongService.findAllBySingerList(id), HttpStatus.OK);
     }
+
+    @GetMapping("/tag/{id}")
+    public ResponseEntity<Iterable<Songs>> getAllSongByTag(@PathVariable Long id) {
+        return new ResponseEntity<>(iSongService.getAllSongByTag(id), HttpStatus.OK);
+    }
 }
 
 

@@ -101,4 +101,8 @@ public class SongService implements ISongService {
         isongRepository.save(songs);
     }
 
+    @Override
+    public Iterable<Songs> getAllSongByTag(Long id) {
+        return isongRepository.getAllSongByTag(id);
+    }
 }

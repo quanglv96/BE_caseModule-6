@@ -120,7 +120,7 @@ public class TagService implements ITagService {
     }
 
     @Override
-    public Iterable<Tags> get15Tag() {
-        return iTagRepository.get15Tag();
+    public Iterable<Tags> get10Tag() {
+        return iTagRepository.get10Tag();
     }
 }
