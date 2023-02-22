@@ -36,4 +36,6 @@ public interface ITagRepository extends JpaRepository<Tags, Long> {
     Iterable<BigInteger> findIdPlaylistByTag(Long id);
     @Query(value = "SELECT * FROM tags ORDER BY RAND() LIMIT 5", nativeQuery = true)
     Iterable<Tags> hint5Tags();
+    @Query(value =  "", nativeQuery = true)
+    Iterable<BigInteger> findAllSongsAndPlaylistByTag(Long id);
 }
