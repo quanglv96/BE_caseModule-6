@@ -49,10 +49,9 @@ public class PlayListController {
     }
     @PostMapping
     public ResponseEntity<?> save(@RequestBody Playlist playlist) {
-        LocalDateTime date_create = LocalDateTime.now();
-        LocalDateTime last_update = LocalDateTime.now();
-        Playlist newUser = new Playlist(playlist.getName(), playlist.getDescription(), playlist.getAvatar(), date_create, last_update, playlist.getUsers(),playlist.getTagsList(), 200);
-        playlistService.save(newUser);
+        playlist.setDateCreate(LocalDateTime.now());
+        playlist.setLastUpdate(LocalDateTime.now());
+        playlistService.save(playlist);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
     @DeleteMapping("{id}")
@@ -90,7 +89,7 @@ public class PlayListController {
     ResponseEntity<Iterable<Songs>> changeSongToPlaylist(@RequestBody Playlist playlist) {
         playlist.setLastUpdate(LocalDateTime.now());
         if(playlist.getId()==null){
-            playlist.setAvatar("https://firebasestorage.googleapis.com/v0/b/upload-file-540c6.appspot.com/o/image%2Ft%E1%BA%A3i%20xu%E1%BB%91ng.png?alt=media&token=4c279154-4518-48ec-bb90-78dd2a3f0b92");
+            playlist.setAvatar("https://thumbs.dreamstime.com/b/music-collection-line-icon-playlist-outline-logo-illustr-illustration-linear-pictogram-isolated-white-90236357.jpg");
             playlist.setDateCreate(LocalDateTime.now());
         }
         playlistService.save(playlist);

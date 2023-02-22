@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @Repository
 @Transactional
@@ -24,9 +23,6 @@ public interface ISongRepository extends JpaRepository<Songs, Long> {
 
     Iterable<Songs> findAllByNameContaining(String name);
 
-    Optional<Songs> findById(Long id);
-
-    Optional<Songs> findByName(String name);
 
 
 
