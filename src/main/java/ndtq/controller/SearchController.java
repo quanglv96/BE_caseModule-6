@@ -28,7 +28,7 @@ public class SearchController {
     @Autowired
     private IUserService iUserService;
     @Autowired
-    private ITagService tagService;
+    private ITagService iTagService;
 
 
     @GetMapping
@@ -60,14 +60,15 @@ public class SearchController {
         return new ResponseEntity<>(resultSearch,HttpStatus.OK);
     }
     @GetMapping("/songsBySinger")
-    public ResponseEntity<Iterable<Songs>> findSongBySinger(@RequestParam("idSinger") Long idSinger){
-        return new ResponseEntity<>(iSongService.findAllBySingerList(idSinger),HttpStatus.OK);
+    public ResponseEntity<Iterable<Songs>> findSongBySinger(@RequestParam("idSinger") Long idSinger) {
+        return new ResponseEntity<>(iSongService.findAllBySingerList(idSinger), HttpStatus.OK);
     }
-    @GetMapping("/tags/{idTag}")
-    public ResponseEntity<Object> findAllByTag(@PathVariable("idTag") Long idTag){
-        ArrayList<Object> result=new ArrayList<>();
-        result.add(tagService.listSongByTag(idTag));
-        result.add(tagService.listPlaylistByTag(idTag));
-        return new ResponseEntity<>(result,HttpStatus.OK);
+
+    @GetMapping("/tag/{id}")
+    public ResponseEntity<Object> getAllPlaylistAndSongByTag(@PathVariable Long id) {
+        List<Object> playAndSong = new ArrayList<>();
+        playAndSong.add(iTagService.listPlaylistByTag(id));
+        playAndSong.add(iTagService.listSongByTag(id));
+        return new ResponseEntity<>(playAndSong, HttpStatus.OK);
     }
 }

@@ -17,4 +17,8 @@ public interface IPlaylistService extends IGeneralService<Playlist> {
 
     Iterable<Playlist> findTopLikePlaylist();
 
+    Iterable<Playlist> findAllByTaglists(String name);
+
+    Iterable<Playlist> findPlaylistByTags(Long id);
+
 }
